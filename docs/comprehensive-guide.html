@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goldbar AM Onboarding - Comprehensive Guide</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container { max-width: 1200px; margin: 0 auto; }
+        
+        header {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+        
+        header h1 { color: #333; font-size: 32px; margin-bottom: 10px; }
+        header p { color: #666; font-size: 16px; margin-bottom: 20px; }
+        
+        .progress-bar {
+            background: #e0e0e0;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .phase {
+            background: white;
+            padding: 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .phase:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); }
+        
+        .phase.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .phase-number {
+            display: inline-block;
+            background: #f0f0f0;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        
+        .phase.active .phase-number { background: rgba(255, 255, 255, 0.3); color: white; }
+        
+        .phase-title { font-weight: 600; margin-bottom: 2px; font-size: 12px; }
+        .phase-duration { font-size: 10px; opacity: 0.7; }
+        
+        .content {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            margin-bottom: 30px;
+        }
+        
+        .phase-content { display: none; }
+        .phase-content.active { display: block; animation: slideIn 0.3s ease; }
+        
+        @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        h2 { color: #333; font-size: 28px; margin-bottom: 8px; }
+        h3 { color: #333; font-size: 18px; margin: 20px 0 12px 0; }
+        .phase-subtitle { color: #666; font-size: 14px; margin-bottom: 25px; }
+        
+        .checklist {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .checklist li {
+            padding: 12px;
+            margin-bottom: 8px;
+            background: #f9f9f9;
+            border-left: 4px solid #667eea;
+            border-radius: 4px;
+            display: flex;
+            align-items: flex-start;
+            line-height: 1.5;
+        }
+        
+        .checklist li:before {
+            content: "✓";
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            margin-right: 12px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .section { margin: 25px 0; }
+        .section-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .key-info {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+        
+        .key-info strong { color: #667eea; }
+        
+        .template {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            white-space: pre-wrap;
+        }
+        
+        .table-responsive {
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        
+        th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        tr:hover { background: #f9f9f9; }
+        
+        .nav {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        button {
+            padding: 12px 24px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        button:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        
+        footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+        
+        a { color: #667eea; text-decoration: none; font-weight: 500; }
+        a:hover { text-decoration: underline; }
+        
+        .badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            margin: 2px;
+        }
+        
+        .dept-box {
+            background: #f9f9f9;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .dept-box strong { color: #667eea; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Goldbar AM Onboarding - Comprehensive Guide</h1>
+            <p>Complete training curriculum for Account Managers and Client Success Team</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+        </header>
+        
+        <div class="timeline" id="timeline"></div>
+        
+        <div class="content" id="content"></div>
+        
+        <div class="nav">
+            <button id="prevBtn" onclick="previousPhase()" disabled>← Previous</button>
+            <button id="nextBtn" onclick="nextPhase()">Next →</button>
+        </div>
+        
+        <footer>
+            <p><a href="/">← Back to Dashboard</a> • Goldbar Account Manager Platform 🚀</p>
+        </footer>
+    </div>
+    
+    <script>
+        const phases = [
+            {
+                title: "Welcome",
+                duration: "Day 1",
+                content: `
+                    <h2>Welcome to Goldbar 🎉</h2>
+                    <p class="phase-subtitle">Your complete roadmap to mastering Account Management at Goldbar</p>
+                    
+                    <div class="section">
+                        <div class="section-title">Your Mission</div>
+                        <div class="key-info">
+                            <strong>🎯 Help clients reclaim their time by thinking like an operator.</strong><br><br>
+                            This means:<br>
+                            • Managing their tasks and projects<br>
+                            • Proactively researching their business<br>
+                            • Identifying improvement opportunities<br>
+                            • Making strategic recommendations<br>
+                            • Contributing to their growth and scaling<br>
+                            • Being a trusted advisor, not just a task handler
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Meet Your Team</div>
+                        <p><strong>These are the people you'll work with every day:</strong></p>
+                        <ul class="checklist">
+                            <li><strong>Jason Matthews</strong> - Head of Client Success (your escalation point & strategic guidance)</li>
+                            <li><strong>Laura Barreneche</strong> - Head CSM Mortgage (backup support & specialized knowledge)</li>
+                            <li><strong>Rose Evans</strong> - Primary AM Mentor (your day-to-day resource & coach)</li>
+                            <li><strong>Training Team</strong> - Emma & Sebastian (VA training & platform onboarding)</li>
+                            <li><strong>Onboarding Team</strong> - Leah, Maria & others (new client/VA setup)</li>
+                            <li><strong>Staffing Team</strong> - Gabriella & James (VA recruitment & placement)</li>
+                            <li><strong>Finance</strong> - Rowan (payroll, billing, expansion approvals)</li>
+                            <li><strong>Your peer AMs</strong> - Collaboration & shared learnings</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Current Team Structure</div>
+                        <div class="key-info">
+                            <strong>📊 Account Management at Scale:</strong><br>
+                            • 3 Account Managers<br>
+                            • 100+ active client accounts<br>
+                            • ~33 clients per AM (vs industry standard of 15-25)<br>
+                            <br>
+                            <strong>This matters because:</strong> You cannot be reactive. Every system, every check-in, every escalation protocol must be designed for efficiency and risk management. Strong processes replace heroic effort.
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">What This Guide Covers</div>
+                        <p><strong>14 comprehensive phases covering everything you need to know:</strong></p>
+                        <ul class="checklist">
+                            <li>Role fundamentals & dual accountability</li>
+                            <li>Client Health Score System (your primary tool)</li>
+                            <li>Daily workflow & tracking systems</li>
+                            <li>VA management & assessment procedures</li>
+                            <li>Client communication & messaging</li>
+                            <li>Escalation protocols & risk management</li>
+                            <li>Department interactions (who to talk to about what)</li>
+                            <li>Meeting structure & cadences</li>
+                            <li>Goldie attendance & performance tracking</li>
+                            <li>Restaffing procedures</li>
+                            <li>Your first 30 days (week-by-week milestones)</li>
+                            <li>Systems & tools mastery</li>
+                            <li>Success metrics & KPIs</li>
+                            <li>Advanced topics for growth</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="key-info">
+                        <strong>📞 First Action:</strong> Schedule these 1:1s:<br>
+                        1. Jason Matthews (30 min) - Role expectations & support<br>
+                        2. Rose Evans (1 hour) - Deep mentorship kickoff<br>
+                        3. Each assigned VA (30 min) - Intro & relationship building<br>
+                        4. Each assigned client (if applicable) - Warm intro from Jason
+                    </div>
+                `
+            },
+            {
+                title: "Core Role",
+                duration: "Days 2-3",
+                content: `
+                    <h2>Your Core Role & Accountability 🎯</h2>
+                    <p class="phase-subtitle">Dual responsibility: client relationships + VA performance</p>
+                    
+                    <div class="section">
+                        <div class="section-title">Dual Accountability Model</div>
+                        <div class="key-info">
+                            <strong>You own two sides of the equation:</strong><br><br>
+                            <strong>LEFT SIDE - Client Success & Growth</strong><br>
+                            • Keep clients happy and satisfied<br>
+                            • Monitor their business results & ROI<br>
+                            • Identify expansion opportunities<br>
+                            • Prevent churn before it happens<br>
+                            • Be their strategic advisor<br><br>
+                            
+                            <strong>RIGHT SIDE - VA Performance & Development</strong><br>
+                            • Hire, onboard, and manage your VA team<br>
+                            • Monitor quality, attendance, and productivity<br>
+                            • Coach VAs to think like operators<br>
+                            • Develop their skills and careers<br>
+                            • Handle performance issues quickly
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Daily Responsibilities (In Priority Order)</div>
+                        <ul class="checklist">
+                            <li><strong>RUN THE DAILY TRACKER</strong> - Medium & Critical Accounts (30 min daily)</li>
+                            <li><strong>MONITOR CLIENT HEALTH</strong> - Check Health Scores, flag risks</li>
+                            <li><strong>CONDUCT VA 1:1s</strong> - Weekly coaching, feedback, development</li>
+                            <li><strong>CHECK GOLDIE DAILY</strong> - VA attendance, hours, quality checks</li>
+                            <li><strong>COMMUNICATE WITH CLIENTS</strong> - Regular check-ins, updates, wins</li>
+                            <li><strong>ESCALATE ISSUES FAST</strong> - No waiting on problems</li>
+                            <li><strong>IDENTIFY OPPORTUNITIES</strong> - Expansion, upsell, improvements</li>
+                            <li><strong>DOCUMENT EVERYTHING</strong> - Slack, Fathom, Sheets for visibility</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Success Metrics - What Matters</div>
+                        <div class="table-responsive">
+                            <table>
+                                <tr>
+                                    <th>Metric</th>
+                                    <th>Target</th>
+                                    <th>Why It Matters</th>
+                                </tr>
+                                <tr>
+                                    <td><strong>Client Retention</strong></td>
+                                    <td>95%+</td>
+                                    <td>Direct impact on revenue & company growth</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Client Satisfaction</strong></td>
+                                    <td>NPS 40+</td>
+                                    <td>Indicates relationship health & willingness to refer</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>VA Attendance</strong></td>
+                                    <td>99%+</td>
+                                    <td>Directly impacts client satisfaction</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Health Score Avg</strong></td>
+                                    <td>70+</td>
+                                    <td>Portfolio health & proactive management</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Expansion Revenue</strong></td>
+                                    <td>15% quarterly</td>
+                                    <td>Growth contribution & strategic value</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Escalation Response</strong></td>
+                                    <td>Same-day</td>
+                                    <td>Prevents small issues from becoming big problems</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "Health Score",
+                duration: "Days 4-5",
+                content: `
+                    <h2>Client Health Score System 📊</h2>
+                    <p class="phase-subtitle">The single most important tool for Account Management</p>
+                    
+                    <div class="section">
+                        <div class="section-title">Why This System Exists</div>
+                        <div class="key-info">
+                            At 33+ clients per AM, <strong>gut feel is not a strategy</strong>. This system replaces intuition with data.<br><br>
+                            <strong>The Health Score tells you:</strong><br>
+                            ✓ Which clients need immediate attention<br>
+                            ✓ Which clients are thriving<br>
+                            ✓ Which are at risk of churning<br>
+                            ✓ Who should get expanded services<br>
+                            ✓ Who needs a check-in TODAY<br><br>
+                            <strong>Result:</strong> You manage proactively, not reactively.
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">The 5 Dimensions (100 points total)</div>
+                        <div class="table-responsive">
+                            <table>
+                                <tr>
+                                    <th>Dimension</th>
+                                    <th>Points</th>
+                                    <th>What It Measures</th>
+                                    <th>Red Flags ⚠️</th>
+                                </tr>
+                                <tr>
+                                    <td><strong>1. Satisfaction</strong></td>
+                                    <td>25 pts</td>
+                                    <td>Client happiness with VA performance & relationship</td>
+                                    <td>Complaints, silence, vague responses</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2. Utilization</strong></td>
+                                    <td>20 pts</td>
+                                    <td>Hours used vs hours paid for</td>
+                                    <td>Dramatically under-using allocated hours</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3. Billing</strong></td>
+                                    <td>20 pts</td>
+                                    <td>Payment on-time, no disputes</td>
+                                    <td>Late payments, billing holds, payment refusals</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>4. Engagement</strong></td>
+                                    <td>20 pts</td>
+                                    <td>Proactive communication & responsiveness</td>
+                                    <td>Ghosting, missing calls, declining communication</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>5. Growth</strong></td>
+                                    <td>15 pts</td>
+                                    <td>Expansion signals, referrals, additional services</td>
+                                    <td>No growth conversation, declining needs</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Scoring Tiers & What They Mean</div>
+                        <div class="key-info">
+                            <strong>🟢 GREEN (70-100):</strong> Client is healthy and engaged. Monitor monthly. Look for expansion.<br><br>
+                            <strong>🟡 YELLOW (50-69):</strong> Watch closely. Something's off. Schedule check-in this week. Identify root cause.<br><br>
+                            <strong>🔴 RED (0-49):</strong> URGENT. Client at churn risk. Call them TODAY. Escalate to Client Success Manager. Develop intervention plan.
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">How to Score (Weekly)</div>
+                        <ul class="checklist">
+                            <li><strong>Satisfaction:</strong> Based on their last 2 weeks of communication (Slack, Fathom call notes, email tone)</li>
+                            <li><strong>Utilization:</strong> Compare hours used to hours contracted. (Use Client Account Tracker)</li>
+                            <li><strong>Billing:</strong> Check if current month is paid, no holds or disputes</li>
+                            <li><strong>Engagement:</strong> Did they respond to your outreach? Are they initiating contact?</li>
+                            <li><strong>Growth:</strong> Any expansion requests? Positive signals about future?</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Action Triggers Based on Score</div>
+                        <div class="key-info">
+                            <strong>Score drops 15+ points?</strong> → Schedule emergency call with client<br>
+                            <strong>Score is RED?</strong> → Escalate to Client Success Manager TODAY<br>
+                            <strong>Score is YELLOW?</strong> → Weekly check-in call until back to Green<br>
+                            <strong>Score hits 70+?</strong> → Confidence point for expansion conversation<br>
+                            <strong>Score stable 80+?</strong> → Quarterly business review to explore growth
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "Daily Workflow",
+                duration: "Days 6-7",
+                content: `
+                    <h2>Daily Workflow & Tracking 📋</h2>
+                    <p class="phase-subtitle">The systems and routines that keep everything visible</p>
+                    
+                    <div class="section">
+                        <div class="section-title">The Daily Medium & Critical Accounts Tracker</div>
+                        <div class="key-info">
+                            <strong>You run this EVERY WEEKDAY (Mon-Fri, same time)</strong><br><br>
+                            <strong>Time commitment:</strong> 30-40 minutes<br>
+                            <strong>Frequency:</strong> 4:15 PM Cairo time (automated Google Calendar reminder)<br>
+                            <strong>Output:</strong> Versioned Excel workbook (tracker_v1, v2, v3, etc)<br>
+                            <strong>Audience:</strong> Jason, Rose, yourself
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">What Goes Into the Daily Tracker</div>
+                        <ul class="checklist">
+                            <li><strong>Critical Accounts Sheet:</strong> All accounts with Health Score RED or trending critical</li>
+                            <li><strong>Medium Accounts Sheet:</strong> All accounts with Health Score YELLOW</li>
+                            <li><strong>Alerts & Cancellations:</strong> Any client mentioning cancellation, restaffing, or billing issues</li>
+                            <li><strong>Daily Priority Dashboard:</strong> Today's action items, escalations, wins</li>
+                            <li><strong>VA Performance Notes:</strong> Any attendance, quality, or communication issues</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">How to Build It (Step-by-Step)</div>
+                        <ol style="padding-left: 20px; margin: 15px 0;">
+                            <li style="margin-bottom: 10px;"><strong>Open the Client Account Tracker</strong> (Google Sheets) - This is your source of truth for all client data</li>
+                            <li style="margin-bottom: 10px;"><strong>Calculate Health Scores</strong> for each client based on the 5 dimensions (see previous section)</li>
+                            <li style="margin-bottom: 10px;"><strong>Pull Fathom notes</strong> - Search for recent client meeting notes, look for complaints or concerns</li>
+                            <li style="margin-bottom: 10px;"><strong>Check Slack channels</strong> (#ga-[client]) - Last 1-2 weeks of BOD/EOD reports and threads</li>
+                            <li style="margin-bottom: 10px;"><strong>Review Google Calendar</strong> - Any scheduled calls today? Upcoming meetings? Notes?</li>
+                            <li style="margin-bottom: 10px;"><strong>Flag escalations</strong> - Any issues that need Jason or the Client Success Manager involvement?</li>
+                            <li style="margin-bottom: 10px;"><strong>Version the file</strong> - Save as tracker_v[number] (increment each day)</li>
+                            <li style="margin-bottom: 10px;"><strong>Share with team</strong> - Post link in #am-general Slack channel for visibility</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Key Accounts to Always Monitor</div>
+                        <p><strong>These accounts have been flagged in team calls - watch them closely:</strong></p>
+                        <ul class="checklist">
+                            <li><strong>Eva Casoria</strong> - Restaffing & billing hold, potential churn risk</li>
+                            <li><strong>Remington Ramsay</strong> - Monitor for satisfaction & VA fit</li>
+                            <li><strong>Andy Moncada</strong> - Near cancellation, requires proactive management</li>
+                            <li><strong>Mark Neely</strong> - Restaffing in progress, communication intensive</li>
+                            <li><strong>Gogo Bethke</strong> - Multi-VA escalation, complex management</li>
+                            <li><strong>Adriana Aggarwal</strong> - Mid-restaff, needs tailored attention</li>
+                            <li><strong>James Nellis</strong> - Monitor for growth opportunity</li>
+                        </ul>
+                    </div>
+                `
+            },
+            {
+                title: "VA Management",
+                duration: "Days 8-10",
+                content: `
+                    <h2>VA Management & Development 🚀</h2>
+                    <p class="phase-subtitle">Coaching, assessment, and performance tracking</p>
+                    
+                    <div class="section">
+                        <div class="section-title">Your VA Coaching Philosophy</div>
+                        <div class="key-info">
+                            <strong>VAs should think like OPERATORS, not just assistants.</strong><br><br>
+                            This means:<br>
+                            ✓ They research the client's business proactively<br>
+                            ✓ They identify improvement opportunities<br>
+                            ✓ They make strategic recommendations<br>
+                            ✓ They're proactive problem-solvers<br>
+                            ✓ They grow the client's business, not just complete tasks<br><br>
+                            Your job is to coach them toward this mindset.
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">VA Assessment Framework</div>
+                        <p><strong>Evaluate each VA on these dimensions:</strong></p>
+                        <div class="table-responsive">
+                            <table>
+                                <tr>
+                                    <th>Dimension</th>
+                                    <th>What to Assess</th>
+                                    <th>Red Flags 🚩</th>
+                                </tr>
+                                <tr>
+                                    <td><strong>Reliability</strong></td>
+                                    <td>Attendance, punctuality, consistency</td>
+                                    <td>Frequent absences, late starts, missed deadlines</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Quality</strong></td>
+                                    <td>Work output, attention to detail, client feedback</td>
+                                    <td>Client complaints, poor quality, rework needed</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Communication</strong></td>
+                                    <td>Responsiveness, clarity, proactivity</td>
+                                    <td>Slow responses, vague updates, not initiating contact</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Ownership</strong></td>
+                                    <td>Takes initiative, solves problems, doesn't blame</td>
+                                    <td>Always blames client, waits for direction, no initiative</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Learning</strong></td>
+                                    <td>Improves over time, accepts feedback, gets better</td>
+                                    <td>Same mistakes repeating, defensive, stagnant</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">VA 1:1 Prep Workflow</div>
+                        <p><strong>Before EVERY 1:1 with a VA, prepare for 15-20 minutes:</strong></p>
+                        <ul class="checklist">
+                            <li>Pull VA's row from VA Information Tracker (Google Sheets)</li>
+                            <li>Review their assigned client's Health Score and status</li>
+                            <li>Read client Slack channel (#ga-[client]) - Last 1-2 weeks of updates</li>
+                            <li>Search Fathom for recent client meetings the VA attended</li>
+                            <li>Check Goldie for attendance & hours worked (details below)</li>
+                            <li>Review their last 1:1 notes - What was discussed? Progress made?</li>
+                            <li>Prepare 5-7 targeted questions based on the above</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">VA 1:1 Structure (30-45 min)</div>
+                        <div class="key-info">
+                            <strong>0-5 min: Check-in</strong><br>
+                            "How are you doing? Any blockers or challenges this week?"<br><br>
+                            
+                            <strong>5-15 min: Client Feedback</strong><br>
+                            "How's the relationship with [client]? Any satisfaction concerns?"<br><br>
+                            
+                            <strong>15-25 min: Performance Review</strong><br>
+                            • Hours worked vs allocated<br>
+                            • Quality of work (client feedback)<br>
+                            • Attendance & reliability<br>
+                            • Communication effectiveness<br><br>
+                            
+                            <strong>25-35 min: Development & Growth</strong><br>
+                            "What skills do you want to develop? Where do you want to grow?"<br><br>
+                            
+                            <strong>35-45 min: Goals & Action Items</strong><br>
+                            "What's your focus for next week? Any training needs?"
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Known VAs & Key Notes</div>
+                        <p><strong>These VAs have been discussed in team calls - watch their development:</strong></p>
+                        <ul class="checklist">
+                            <li><strong>Farres Nagaa</strong> - Abbott Martin Group client. Strong performer & expansion opportunity</li>
+                            <li><strong>Ella Wilson / Esraa</strong> - Overtime / scope risk. Monitor hours carefully</li>
+                            <li><strong>Alessandro Conetta</strong> - Under-communication flag. Needs coaching on client updates</li>
+                            <li><strong>María José Rocha Castillo</strong> - Week-one VA. Intensive onboarding & support</li>
+                            <li><strong>Sofia Hollman</strong> - Monitor for growth & development</li>
+                        </ul>
+                    </div>
+                `
+            },
+            {
+                title: "Goldie Tracking",
+                duration: "Days 11-12",
+                content: `
+                    <h2>Goldie Attendance & Performance Tracking 📱</h2>
+                    <p class="phase-subtitle">Your daily system for monitoring VA activity and hours</p>
+                    
+                    <div class="section">
+                        <div class="section-title">What is Goldie?</div>
+                        <div class="key-info">
+                            <strong>Goldy.ai</strong> is Goldbar's internal performance platform where VAs:<br><br>
+                            • Clock in/out daily<br>
+                            • Log hours worked<br>
+                            • Report BOD (Beginning of Day) and EOD (End of Day) status<br>
+                            • Track tasks and projects<br>
+                            • Upload client assets<br>
+                            • Submit discovery & playbooks<br>
+                            • Record performance metrics<br><br>
+                            <strong>YOU use Goldie to:</strong><br>
+                            ✓ Check daily attendance (Is the VA logged in?)<br>
+                            ✓ Monitor hours worked<br>
+                            ✓ Review BOD/EOD reports<br>
+                            ✓ Identify performance issues<br>
+                            ✓ Track training completion
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Daily Goldie Check (5-10 minutes)</div>
+                        <p><strong>Each morning or at start of your day, check Goldie for:</strong></p>
+                        <ul class="checklist">
+                            <li><strong>Attendance Status:</strong> Is each VA checked in? Are they active?</li>
+                            <li><strong>Any Absences?</strong> Mark as: In / Out-Approved / Out-Pending / Absent / Missing</li>
+                            <li><strong>Hours Yesterday:</strong> Did they work their full shift? Any gaps?</li>
+                            <li><strong>BOD Reports:</strong> Did VAs submit their start-of-day updates?</li>
+                            <li><strong>Client Feedback:</strong> Any notes from clients about VA performance?</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Leave Codes & What They Mean</div>
+                        <div class="table-responsive">
+                            <table>
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Meaning</th>
+                                    <th>Duration</th>
+                                    <th>Approval By</th>
+                                </tr>
+                                <tr>
+                                    <td><strong>UL</strong></td>
+                                    <td>Unpaid Leave</td>
+                                    <td>Any length</td>
+                                    <td>AM (you)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>PL</strong></td>
+                                    <td>Paid Leave / Vacation</td>
+                                    <td>Accrued hours</td>
+                                    <td>AM + Finance</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>SL</strong></td>
+                                    <td>Sick Leave</td>
+                                    <td>As needed</td>
+                                    <td>AM (with note)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>HOL</strong></td>
+                                    <td>Holiday (Company-wide)</td>
+                                    <td>Full day</td>
+                                    <td>Automatically marked</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>OFF</strong></td>
+                                    <td>Day Off (Scheduled)</td>
+                                    <td>Full day</td>
+                                    <td>Set in schedule</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Red Flags on Goldie to Watch</div>
+                        <ul class="checklist">
+                            <li><strong>Repeated Absences:</strong> More than 2 unscheduled absences per month = performance issue</li>
+                            <li><strong>Late Clock-ins:</strong> Consistently starting 5+ minutes late = reliability concern</li>
+                            <li><strong>Missing EOD Reports:</strong> Not logging out or submitting end-of-day = accountability issue</li>
+                            <li><strong>Hours Mismatch:</strong> Clock hours don't match contracted hours = time theft or burnout</li>
+                            <li><strong>Client Complaints in Notes:</strong> Red flag for immediate coaching needed</li>
+                            <li><strong>Incomplete Tasks:</strong> Tasks sitting "in progress" too long = needs help or capacity issue</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Escalation Path for Goldie Issues</div>
+                        <div class="key-info">
+                            <strong>Attendance Issue (1-2 times)?</strong> → 1:1 conversation with VA<br><br>
+                            <strong>Attendance Issue (3+ times)?</strong> → Document in Goldie + escalate to Client Success Manager<br><br>
+                            <strong>Performance complaint from client?</strong> → Same-day 1:1 with VA to understand + coach<br><br>
+                            <strong>Quality declining?</strong> → Schedule training with Training team (Emma or Sebastian)<br><br>
+                            <strong>Chronic issues after coaching?</strong> → Escalate restaffing discussion to Client Success Manager
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "Departments",
+                duration: "Days 13-14",
+                content: `
+                    <h2>Department Interactions 🏢</h2>
+                    <p class="phase-subtitle">Who to talk to about what & internal handoff procedures</p>
+                    
+                    <div class="section">
+                        <div class="section-title">The Five Departments You'll Work With</div>
+                        
+                        <div class="dept-box">
+                            <strong>1. TRAINING DEPARTMENT</strong><br>
+                            <strong>Team:</strong> Emma (Goldy.ai & Claude AI training), Sebastian (Part-time)<br>
+                            <strong>You reach out about:</strong><br>
+                            • VA skills training (technical, platform, communication)<br>
+                            • Claude AI and Goldy platform onboarding<br>
+                            • Certification & compliance training<br>
+                            • New tool training for VAs<br>
+                            <strong>Timeline:</strong> 1-2 weeks to schedule & deliver<br>
+                            <strong>Example:</strong> "Ella needs communication coaching - can Emma schedule a 1:1?"
+                        </div>
+                        
+                        <div class="dept-box">
+                            <strong>2. ONBOARDING DEPARTMENT</strong><br>
+                            <strong>Team:</strong> Leah (Manager), Maria (Specialist), Frank (First call facilitator)<br>
+                            <strong>You reach out about:</strong><br>
+                            • New client onboarding (they own: CEO Mastery Call, Cafecito Call)<br>
+                            • New VA onboarding<br>
+                            • Launch call scheduling<br>
+                            • Post-launch hypercare (Days 1, 3, 7, 14)<br>
+                            <strong>Key Rule:</strong> You are EXCLUDED from Cafecito Call (client only)<br>
+                            <strong>Timeline:</strong> Flows with sales close date (typically 2-4 weeks)<br>
+                            <strong>Example:</strong> "New client closes Friday - coordinate CEO Mastery Call for next week"
+                        </div>
+                        
+                        <div class="dept-box">
+                            <strong>3. STAFFING DEPARTMENT</strong><br>
+                            <strong>Team:</strong> Gabriella (Lead), James (Coordinator)<br>
+                            <strong>You reach out about:</strong><br>
+                            • VA recruitment for your accounts<br>
+                            • Restaffing when client needs new VA<br>
+                            • Temp VA coverage for absences<br>
+                            • VA capacity & availability checks<br>
+                            <strong>Finance Gate:</strong> Expansion requests must be approved by Rowan FIRST<br>
+                            <strong>Timeline:</strong> 1-3 weeks to place VA, depends on role<br>
+                            <strong>Example:</strong> "Eva needs a new VA - draft position, send to Rowan for expansion approval"
+                        </div>
+                        
+                        <div class="dept-box">
+                            <strong>4. CLIENT SUCCESS TEAM</strong><br>
+                            <strong>Team:</strong> Jason Matthews (Head of CS), Laura Barreneche (Head CSM Mortgage), Rose Evans (AM Mentor)<br>
+                            <strong>You reach out about:</strong><br>
+                            • Client escalations (Tier 2 & Tier 3)<br>
+                            • Strategic decisions on client accounts<br>
+                            • Restaffing approvals<br>
+                            • Expansion opportunity evaluation<br>
+                            • Churn prevention & save efforts<br>
+                            <strong>Daily touchpoint:</strong> 15-min standup (all AMs + CSM)<br>
+                            <strong>Timeline:</strong> Same-day response for escalations<br>
+                            <strong>Example:</strong> "Eva threatening to cancel - scheduling call with Jason today"
+                        </div>
+                        
+                        <div class="dept-box">
+                            <strong>5. FINANCE DEPARTMENT</strong><br>
+                            <strong>Contact:</strong> Rowan (Finance/Payroll decision-maker)<br>
+                            <strong>You reach out about:</strong><br>
+                            • Expansion request approvals (ALWAYS first)<br>
+                            • Billing holds or disputes<br>
+                            • Payment issues<br>
+                            • Payroll & hour reconciliation<br>
+                            <strong>Critical Rule:</strong> NO restaffing discussed until Finance approves expansion<br>
+                            <strong>Timeline:</strong> 2-5 business days for approvals<br>
+                            <strong>Example:</strong> "Andy wants to add 20 hours - sending expansion request to Rowan"
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">When to Escalate to Client Success Manager</div>
+                        <ul class="checklist">
+                            <li>Client threatening to cancel</li>
+                            <li>VA performance crisis (quality, attendance, etc)</li>
+                            <li>Billing dispute or payment hold</li>
+                            <li>Restaffing decision after Finance approval</li>
+                            <li>Expansion opportunity evaluation</li>
+                            <li>Client communication breakdown</li>
+                            <li>Any situation affecting contract terms or pricing</li>
+                            <li>Major scope changes or new service requests</li>
+                        </ul>
+                    </div>
+                `
+            },
+            {
+                title: "Meetings",
+                duration: "Days 15-16",
+                content: `
+                    <h2>Meetings & Cadences 📅</h2>
+                    <p class="phase-subtitle">Recurring meetings that keep the team aligned and informed</p>
+                    
+                    <div class="section">
+                        <div class="section-title">Daily — Team Standup</div>
+                        <div class="key-info">
+                            <strong>⏰ 15 minutes · Every weekday · Same time each day</strong><br>
+                            <strong>👥 Attendees:</strong> All AMs + Client Success Manager (Jason)<br>
+                            <strong>Format:</strong><br>
+                            
+                            <strong>0-2 min: Urgent Issues</strong><br>
+                            Only Tier 2/3 escalations or RED accounts needing same-day action<br><br>
+                            
+                            <strong>2-10 min: Portfolio Round</strong><br>
+                            Each AM: "One thing I'm watching today" (one sentence each)<br><br>
+                            
+                            <strong>10-13 min: Cross-Team Updates</strong><br>
+                            CSM shares updates from Onboarding, Staffing, Finance<br><br>
+                            
+                            <strong>13-15 min: Follow-ups</strong><br>
+                            Confirm who needs a conversation immediately after standup<br><br>
+                            
+                            <strong>Why it matters:</strong> Early warning system for problems. If everyone knows what's being watched, nothing falls through cracks.
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Weekly — Portfolio Review (1:1)</div>
+                        <div class="key-info">
+                            <strong>⏰ 30 minutes · Every week · With Client Success Manager (Jason)</strong><br>
+                            <strong>Agenda:</strong><br>
+                            
+                            <strong>0-5 min: Health Snapshot</strong><br>
+                            How many GREEN, YELLOW, RED accounts this week?<br><br>
+                            
+                            <strong>5-18 min: Deep Dive</strong><br>
+                            For each YELLOW/RED account: root cause + intervention plan<br><br>
+                            
+                            <strong>18-25 min: Compliance Check</strong><br>
+                            Are check-ins happening? Documentation current? Escalations logged?<br><br>
+                            
+                            <strong>25-30 min: Coaching & Support</strong><br>
+                            "What do you need from me? Any blockers?"<br><br>
+                            
+                            <strong>Outcome:</strong> Clear action plan for next week
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Weekly — Escalation Review</div>
+                        <div class="key-info">
+                            <strong>⏰ 20 minutes · Every week · All AMs + CSM</strong><br>
+                            <strong>Agenda:</strong><br>
+                            
+                            <strong>0-10 min: Open Escalations</strong><br>
+                            Walk every active escalation by tier (Tier 1/2/3)<br>
+                            Status? SLA on track?<br><br>
+                            
+                            <strong>10-16 min: Closed Escalations</strong><br>
+                            Quick debrief on resolved items - learnings?<br><br>
+                            
+                            <strong>16-20 min: Patterns</strong><br>
+                            Are we seeing similar issues across accounts? Process gap?<br><br>
+                            
+                            <strong>Outcome:</strong> Escalation resolution tracking + pattern recognition
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Monthly — AM Performance Review (1:1)</div>
+                        <div class="key-info">
+                            <strong>⏰ 30 minutes · Once per month · With Client Success Manager</strong><br>
+                            <strong>Topics:</strong><br>
+                            
+                            • KPI review vs targets (retention, expansion, health score)<br>
+                            • Churn analysis (any clients lost? Why?)<br>
+                            • Expansion pipeline (who's ready for upsell?)<br>
+                            • Development goals (what's your focus next month?)<br>
+                            • Coaching feedback (what's going well? What to improve?)<br><br>
+                            
+                            <strong>Outcome:</strong> Clarity on performance + growth plan
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Quarterly — Business Reviews (Client-Facing)</div>
+                        <div class="key-info">
+                            <strong>⏰ 45-60 minutes per client · Quarterly · With client + VA + AM</strong><br>
+                            <strong>Agenda:</strong><br>
+                            
+                            <strong>0-10 min: Value Delivered</strong><br>
+                            What has the VA accomplished? Metrics, results, time saved<br><br>
+                            
+                            <strong>10-20 min: Relationship & Performance</strong><br>
+                            How is the VA performing? Satisfaction? Improvements made?<br><br>
+                            
+                            <strong>20-35 min: Looking Ahead</strong><br>
+                            Growth opportunities? New services? Expansion discussion?<br><br>
+                            
+                            <strong>35-45 min: Close & Commitments</strong><br>
+                            What are we committing to next quarter?<br><br>
+                            
+                            <strong>Outcome:</strong> Stronger relationship + expansion signal
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "Communication",
+                duration: "Days 17-18",
+                content: `
+                    <h2>Client Communication & Messaging 💬</h2>
+                    <p class="phase-subtitle">How to build and maintain strong client relationships</p>
+                    
+                    <div class="section">
+                        <div class="section-title">Communication Principles</div>
+                        <ul class="checklist">
+                            <li><strong>Warm check-ins</strong> for clients you've already engaged with (reference prior calls)</li>
+                            <li><strong>Fresh introductions</strong> for new clients on your roster (no assumption of prior contact)</li>
+                            <li><strong>Keep it concise:</strong> 3 sentences MAX, no em-dashes (use commas)</li>
+                            <li><strong>Always include calendar link</strong> for Client Success Manager scheduling</li>
+                            <li><strong>Proactive > Reactive:</strong> Reach out before problems arise</li>
+                            <li><strong>Regular touchpoints:</strong> At least 2x per month minimum</li>
+                            <li><strong>Same-day responses:</strong> Client reaches out → you reply today</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Message Templates (From Real Batch 1 Campaign)</div>
+                        
+                        <div class="template">Warm Check-in (Client you've engaged):
+"Hi [Client], wanted to check in and see how [VA Name] is supporting you. Any feedback or areas we can improve? 📅 [Calendar Link]"</div>
+                        
+                        <div class="template">Fresh Introduction (New client):
+"Hi [Client], I'm [Your Name], your Account Manager at Goldbar. Excited to work together and support your growth! Let's connect soon. 📅 [Calendar Link]"</div>
+                        
+                        <div class="template">Quick Win (After delivery):
+"Hi [Client], [VA Name] just completed [specific task]. Let us know if you need anything else!"</div>
+                        
+                        <div class="template">Expansion Conversation Starter:
+"Hi [Client], I've noticed [specific improvement/opportunity]. Would love to discuss how we can support you in this area. Available for a quick call? 📅 [Calendar Link]"</div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Where to Find Client Calendar Link</div>
+                        <div class="key-info">
+                            <strong>Client Success Manager's Calendar Link:</strong><br>
+                            This link is used for ALL client scheduling requests<br>
+                            Format: "📅 [Calendar Link for Client Success Manager]"<br><br>
+                            <strong>Always hyperlink the text, not the raw URL</strong><br>
+                            Good: "📅 Book a call with Jason"<br>
+                            Bad: "https://..."
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Process for Batch Messaging (Like You Did)</div>
+                        <ul class="checklist">
+                            <li><strong>Step 1:</strong> Check Slack posting history for each client (prior contact?)</li>
+                            <li><strong>Step 2:</strong> Check Fathom for attendance (have you spoken?)</li>
+                            <li><strong>Step 3:</strong> Tailor message (warm vs fresh intro based on above)</li>
+                            <li><strong>Step 4:</strong> Draft in Excel/Google Sheet for visibility</li>
+                            <li><strong>Step 5:</strong> Get approval from CSM (Jason) if needed</li>
+                            <li><strong>Step 6:</strong> Send in Slack direct message (not channel)</li>
+                            <li><strong>Step 7:</strong> Document in Slack thread or Fathom notes</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Difficult Conversations</div>
+                        <div class="key-info">
+                            <strong>Client not happy with VA?</strong><br>
+                            "I want to make sure you're getting the best support. What specifically could be better? Let's fix this."<br><br>
+                            
+                            <strong>Client threatening to cancel?</strong><br>
+                            SAME-DAY call with Client Success Manager + you. Not a message, not tomorrow. TODAY.<br><br>
+                            
+                            <strong>Billing dispute?</strong><br>
+                            "I see there's a discrepancy here. Let me get our Finance team involved to resolve this quickly."<br><br>
+                            
+                            <strong>Scope creep?</strong><br>
+                            "I love that you're finding new work for the VA! Let's map out what's realistic within the current hours and discuss expanding if you want more."
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "Escalations",
+                duration: "Days 19-20",
+                content: `
+                    <h2>Escalation Protocol & Risk Management ⚠️</h2>
+                    <p class="phase-subtitle">How to identify, escalate, and resolve issues before they become crises</p>
+                    
+                    <div class="section">
+                        <div class="section-title">Escalation Tiers</div>
+                        <div class="table-responsive">
+                            <table>
+                                <tr>
+                                    <th>Tier</th>
+                                    <th>Severity</th>
+                                    <th>Examples</th>
+                                    <th>Action</th>
+                                    <th>Timeline</th>
+                                </tr>
+                                <tr>
+                                    <td><strong>Tier 1</strong></td>
+                                    <td>Minor issue</td>
+                                    <td>Small quality issue, minor delay, communication gap</td>
+                                    <td>You handle + document</td>
+                                    <td>Resolve within 48 hours</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Tier 2</strong></td>
+                                    <td>Medium issue</td>
+                                    <td>VA performance problem, client dissatisfaction, scope creep</td>
+                                    <td>You + CSM align on plan</td>
+                                    <td>Escalate within 24 hours</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Tier 3</strong></td>
+                                    <td>Critical/Churn risk</td>
+                                    <td>Client threatening cancel, major quality failure, billing dispute</td>
+                                    <td>CSM takes lead + You support</td>
+                                    <td>SAME-DAY response</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Escalation Protocol (Step-by-Step)</div>
+                        <ul class="checklist">
+                            <li><strong>Identify the issue EARLY</strong> - Don't wait for client complaint</li>
+                            <li><strong>Document clearly</strong> - What's the problem? Root cause? Impact?</li>
+                            <li><strong>Propose solution</strong> - Don't just report problems</li>
+                            <li><strong>Escalate immediately</strong> - Reach out to Client Success Manager SAME DAY</li>
+                            <li><strong>Get approval on plan</strong> - "Here's what I recommend, do you agree?"</li>
+                            <li><strong>Communicate to client</strong> - "Here's what we're doing to fix this"</li>
+                            <li><strong>Follow up & track</strong> - Ensure resolution, document outcome</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Common Escalation Triggers (From Team Calls)</div>
+                        <ul class="checklist">
+                            <li><strong>Client threatening to cancel</strong> - Eva Casoria, Andy Moncada examples</li>
+                            <li><strong>VA performance issues</strong> - Attendance, quality, communication</li>
+                            <li><strong>Billing disputes or payment holds</strong> - Eva had billing hold example</li>
+                            <li><strong>Communication breakdown</strong> - Client/VA not aligned</li>
+                            <li><strong>Scope creep</strong> - Hours exceeding allocation</li>
+                            <li><strong>Missed deadlines or quality failures</strong> - Client visible impact</li>
+                            <li><strong>Client control issues</strong> - Like Don (Growth Gospel) not delegating</li>
+                            <li><strong>Restaffing needed</strong> - VA fit issue or client request</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Restaffing Decision Tree</div>
+                        <ol style="padding-left: 20px; margin: 15px 0;">
+                            <li style="margin-bottom: 10px;"><strong>Is this a coaching issue?</strong><br>
+                            Try 1:1 support & training first. Don't jump to restaffing.</li>
+                            
+                            <li style="margin-bottom: 10px;"><strong>Is this a personality/fit issue?</strong><br>
+                            Are the VA and client fundamentally misaligned?</li>
+                            
+                            <li style="margin-bottom: 10px;"><strong>Have we invested in training?</strong><br>
+                            Send VA to Training team (Emma) for skill-building</li>
+                            
+                            <li style="margin-bottom: 10px;"><strong>Does client want the VA gone?</strong><br>
+                            If yes → escalate restaffing discussion to CSM immediately</li>
+                            
+                            <li style="margin-bottom: 10px;"><strong>Finance approval?</strong><br>
+                            If expansion needed, send request to Rowan BEFORE discussing with Staffing</li>
+                            
+                            <li style="margin-bottom: 10px;"><strong>Staffing conversation</strong><br>
+                            Once CSM approves → talk to Gabriella (Staffing Lead) about replacement</li>
+                            
+                            <li style="margin-bottom: 10px;"><strong>Client communication</strong><br>
+                            Manage the transition carefully. New VA = new expectations</li>
+                        </ol>
+                    </div>
+                `
+            },
+            {
+                title: "First 30 Days",
+                duration: "Weeks 1-4",
+                content: `
+                    <h2>Your First 30 Days - Week by Week 🗓️</h2>
+                    <p class="phase-subtitle">Milestones for success in your first month</p>
+                    
+                    <div class="section">
+                        <div class="section-title">Week 1: Foundation & Relationships</div>
+                        <div class="key-info">
+                            <strong>Goal:</strong> Meet the team, understand your portfolio, get comfortable with systems<br><br>
+                            <strong>Monday:</strong><br>
+                            ✓ Meet Jason (30 min) - Role expectations, support available<br>
+                            ✓ Meet Rose (1 hour) - Mentorship kickoff, assigned accounts<br>
+                            ✓ Tour the systems - Google Sheets, Slack, Fathom, Goldie<br><br>
+                            
+                            <strong>Tuesday-Wednesday:</strong><br>
+                            ✓ Meet each assigned VA (30 min each) - Build relationships<br>
+                            ✓ Meet assigned clients (if applicable) - Warm intro from Jason<br>
+                            ✓ Review Client Account Tracker - Know your portfolio cold<br><br>
+                            
+                            <strong>Thursday:</strong><br>
+                            ✓ Complete Goldie platform training<br>
+                            ✓ Watch 2-3 old Fathom calls (CSM calls) - See process<br>
+                            ✓ Set up recurring calendar reminders (daily standup, reviews, 1:1s)<br><br>
+                            
+                            <strong>Friday:</strong><br>
+                            ✓ Run your FIRST daily tracker (with Rose's input)<br>
+                            ✓ Debrief with Rose - What went smoothly? What confused you?<br>
+                            ✓ Plan for Week 2
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Week 2: Engagement & Action</div>
+                        <div class="key-info">
+                            <strong>Goal:</strong> Start engaging with clients & VAs, run daily workflow, identify issues<br><br>
+                            <strong>Daily:</strong><br>
+                            ✓ Run daily Medium & Critical Accounts Tracker (4:15 PM Cairo)<br>
+                            ✓ Check Goldie each morning - Attendance, hours, any flags<br>
+                            ✓ Attend team standup (15 min)<br><br>
+                            
+                            <strong>This Week:</strong><br>
+                            ✓ Conduct first 1:1 with each assigned VA<br>
+                            ✓ Send outreach message to every assigned client (warm or fresh intro)<br>
+                            ✓ Identify 2-3 at-risk accounts (Health Score RED/YELLOW)<br>
+                            ✓ First weekly portfolio review with Jason (30 min)<br>
+                            ✓ First weekly escalation review with team (20 min)<br><br>
+                            
+                            <strong>Outcome:</strong> You've met everyone, they know who you are, and you understand your portfolio
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Week 3: Independence & Decisions</div>
+                        <div class="key-info">
+                            <strong>Goal:</strong> Make your first decisions independently, handle your first escalation, spot opportunities<br><br>
+                            <strong>This Week:</strong><br>
+                            ✓ Run daily tracker solo (no Rose input needed)<br>
+                            ✓ Handle your first Tier 1 escalation independently<br>
+                            ✓ Propose first improvement idea for a client (to CSM)<br>
+                            ✓ Second weekly portfolio review with Jason - Discuss RED accounts<br>
+                            ✓ Second set of VA 1:1s - Notice patterns<br>
+                            ✓ Second weekly escalation review - You're contributing insights now<br><br>
+                            
+                            <strong>Confidence Signals:</strong><br>
+                            • You can run the daily tracker without help<br>
+                            • You know which clients are at risk<br>
+                            • You know your VAs' strengths and development areas<br>
+                            • You've made your first client outreach
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Week 4: Mastery & Growth</div>
+                        <div class="key-info">
+                            <strong>Goal:</strong> Demonstrate mastery of core functions, start thinking strategically<br><br>
+                            <strong>This Week:</strong><br>
+                            ✓ First Tier 2 escalation (with CSM support)<br>
+                            ✓ First expansion conversation with a client<br>
+                            ✓ Third set of VA 1:1s - You notice improvements from coaching<br>
+                            ✓ Month-end portfolio review with Jason (45 min)<br>
+                            ✓ Receive feedback on first month performance<br><br>
+                            
+                            <strong>30-Day Success Looks Like:</strong><br>
+                            ✓ You can manage your portfolio independently<br>
+                            ✓ You anticipate client & VA needs<br>
+                            ✓ You've identified growth opportunities<br>
+                            ✓ Clients and VAs trust you<br>
+                            ✓ You're comfortable with daily systems<br>
+                            ✓ You know when/how to escalate<br>
+                            ✓ You understand the business fundamentals
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "Systems & Tools",
+                duration: "Days 21-22",
+                content: `
+                    <h2>Systems & Tools - Complete Reference 🛠️</h2>
+                    <p class="phase-subtitle">Master the technology stack that runs Account Management</p>
+                    
+                    <div class="section">
+                        <div class="section-title">Core Systems You'll Use Daily</div>
+                        <div class="table-responsive">
+                            <table>
+                                <tr>
+                                    <th>System</th>
+                                    <th>What It Is</th>
+                                    <th>What You Do In It</th>
+                                    <th>Frequency</th>
+                                </tr>
+                                <tr>
+                                    <td><strong>Fathom</strong></td>
+                                    <td>Meeting recordings & AI transcripts</td>
+                                    <td>Search for client call notes, insights, context</td>
+                                    <td>Daily (for daily tracker)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Slack</strong></td>
+                                    <td>Team & client communication</td>
+                                    <td>Send messages, read #ga-[client] channels, escalate issues</td>
+                                    <td>Throughout day</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Google Sheets</strong></td>
+                                    <td>Client & VA tracker databases</td>
+                                    <td>Reference client info, VA data, health scores</td>
+                                    <td>Daily</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Google Calendar</strong></td>
+                                    <td>Meeting scheduling</td>
+                                    <td>Schedule 1:1s, recurring tasks, client calls</td>
+                                    <td>As needed</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Excel</strong></td>
+                                    <td>Daily tracking workbooks</td>
+                                    <td>Create & version daily tracker (tracker_v1, v2, etc)</td>
+                                    <td>Daily (4:15 PM)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Goldie (Goldy.ai)</strong></td>
+                                    <td>VA performance platform</td>
+                                    <td>Check attendance, hours, BOD/EOD reports, tasks</td>
+                                    <td>Daily morning</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Key Files & Spreadsheets You'll Access</div>
+                        <ul class="checklist">
+                            <li><strong>Client Account Tracker</strong> (Google Sheets) - All client info, contacts, status, health data</li>
+                            <li><strong>VA Information Tracker</strong> (Google Sheets) - All VA data, assignments, shift times, performance</li>
+                            <li><strong>Daily Medium & Critical Accounts Tracker</strong> (Excel) - Your daily output, versioned each day</li>
+                            <li><strong>Slack Channels:</strong> #ga-[client] for each client, #am-general for team discussion</li>
+                            <li><strong>Google Drive:</strong> Organized by client folder with meeting notes, templates, documentation</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Productivity Hacks & Shortcuts</div>
+                        <div class="key-info">
+                            <strong>Google Sheets:</strong><br>
+                            Ctrl+D = fill down (copy formula to cells below)<br>
+                            Ctrl+R = fill right (copy formula to cells right)<br>
+                            Ctrl+/ = search in sheet<br><br>
+                            
+                            <strong>Fathom:</strong><br>
+                            Use search to find keywords: "frustrated", "issue", "escalation", "canceling"<br>
+                            Read transcript summaries, not full transcripts (saves time)<br><br>
+                            
+                            <strong>Slack:</strong><br>
+                            Create saved searches for your clients<br>
+                            Use search filters: from:[name] in:#[channel]<br><br>
+                            
+                            <strong>Excel:</strong><br>
+                            Use conditional formatting to highlight RED accounts<br>
+                            Create dropdown filters for easy sorting<br><br>
+                            
+                            <strong>Time Saving Goal:</strong><br>
+                            Best AMs save 2+ hours/day on admin work through automation and templates.
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "Success Metrics",
+                duration: "Days 23-24",
+                content: `
+                    <h2>KPIs & Success Metrics - What Gets Measured 📊</h2>
+                    <p class="phase-subtitle">How your performance is evaluated and what matters most</p>
+                    
+                    <div class="section">
+                        <div class="section-title">The Six KPIs That Matter</div>
+                        <div class="table-responsive">
+                            <table>
+                                <tr>
+                                    <th>KPI</th>
+                                    <th>Target</th>
+                                    <th>How It's Calculated</th>
+                                    <th>Why It Matters</th>
+                                </tr>
+                                <tr>
+                                    <td><strong>Client Retention</strong></td>
+                                    <td>95%+</td>
+                                    <td>Clients at end of period / clients at start of period</td>
+                                    <td>Direct revenue impact + company growth</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Client Satisfaction (NPS)</strong></td>
+                                    <td>40+</td>
+                                    <td>Quarterly survey: "Would you recommend Goldbar?"</td>
+                                    <td>Indicates relationship health & referral willingness</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Portfolio Health Score</strong></td>
+                                    <td>70+</td>
+                                    <td>Average Health Score across all your accounts</td>
+                                    <td>Indicates proactive management & risk coverage</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Expansion Revenue</strong></td>
+                                    <td>15% quarterly growth</td>
+                                    <td>Upsells + additional hours contracted in quarter</td>
+                                    <td>Shows ability to identify and capture growth</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Escalation Resolution</strong></td>
+                                    <td>Same-day (Tier 2/3)</td>
+                                    <td>Time from escalation to CSM engagement</td>
+                                    <td>Prevents small issues from becoming big problems</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>VA Attendance</strong></td>
+                                    <td>99%+</td>
+                                    <td>Days worked / days scheduled (from Goldie)</td>
+                                    <td>Directly impacts client satisfaction</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Monthly Review Meeting</div>
+                        <div class="key-info">
+                            <strong>⏰ 30 minutes · Once per month · With Client Success Manager</strong><br><br>
+                            <strong>Agenda:</strong><br>
+                            • KPI review vs targets<br>
+                            • Churn analysis (any clients lost? Why?)<br>
+                            • Expansion pipeline review<br>
+                            • VA performance summary<br>
+                            • Coaching feedback & development goals<br><br>
+                            <strong>Outcome:</strong> Clear understanding of where you stand and what to focus on next
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Quarterly Business Review (Client-Facing)</div>
+                        <div class="key-info">
+                            <strong>⏰ 45-60 minutes per client · Quarterly · Client + VA + AM</strong><br><br>
+                            <strong>Your role:</strong><br>
+                            • Show value delivered (time saved, results, improvements)<br>
+                            • Discuss VA performance and relationship<br>
+                            • Explore growth signals and expansion opportunities<br>
+                            • Confirm satisfaction and address concerns<br><br>
+                            <strong>Expected outcome:</strong> Stronger relationship + expansion conversation
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "Growth Path",
+                duration: "Month 2+",
+                content: `
+                    <h2>Beyond Day 30 - Long-Term Growth 🚀</h2>
+                    <p class="phase-subtitle">Building expertise and becoming a world-class Account Manager</p>
+                    
+                    <div class="section">
+                        <div class="section-title">Mastery Progression</div>
+                        <div class="key-info">
+                            <strong>Month 1 (Now):</strong> Learn the systems and manage reactively<br><br>
+                            <strong>Month 2-3:</strong> Develop predictive capability - you see issues coming<br><br>
+                            <strong>Month 4-6:</strong> Drive strategic growth - expansion, retention, VA development<br><br>
+                            <strong>Month 6+:</strong> Thought leader - you're teaching others, mentoring new AMs
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Advanced Skills to Master</div>
+                        <ul class="checklist">
+                            <li><strong>Strategic Planning:</strong> Help clients think 3-6 months ahead for their business</li>
+                            <li><strong>Negotiation:</strong> Navigate pricing, scope, and restaffing discussions professionally</li>
+                            <li><strong>Coaching & Mentoring:</strong> Develop VAs into leaders, not just task-doers</li>
+                            <li><strong>Business Acumen:</strong> Understand client industries deeply enough to offer insights</li>
+                            <li><strong>Problem-Solving:</strong> Find creative solutions to complex client/VA situations</li>
+                            <li><strong>Risk Management:</strong> Spot patterns and prevent problems before they happen</li>
+                            <li><strong>Data Analysis:</strong> Use KPIs and trends to make decisions, not gut feel</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Your Support System for Growth</div>
+                        <ul class="checklist">
+                            <li><strong>Rose Evans:</strong> Your primary mentor for AM best practices & coaching</li>
+                            <li><strong>Jason Matthews:</strong> Strategic guidance, escalation, career development</li>
+                            <li><strong>Peer AMs:</strong> Collaboration, shared learnings, problem-solving together</li>
+                            <li><strong>Weekly 1:1s:</strong> Regular feedback and coaching (never stop learning)</li>
+                            <li><strong>Team Standups:</strong> Daily visibility into what's working across all portfolios</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Long-Term Vision</div>
+                        <div class="key-info">
+                            <strong>🌟 We're building a world-class Account Management department that:</strong><br><br>
+                            ✓ Delivers exceptional experiences for clients<br>
+                            ✓ Develops VAs into strategic partners<br>
+                            ✓ Scales sustainably without heroic effort<br>
+                            ✓ Uses systems and data instead of gut feel<br>
+                            ✓ Supports Goldbar's long-term growth<br>
+                            ✓ Creates career paths for high performers<br><br>
+                            You're part of building that. Every system you master, every client you retain, every VA you develop - it all contributes to something bigger.
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Questions You Should Ask By Month 2</div>
+                        <ul class="checklist">
+                            <li>"Which 2-3 accounts have the biggest expansion potential?"</li>
+                            <li>"What patterns are we seeing across churn risks?"</li>
+                            <li>"How can my VA development improve client satisfaction?"</li>
+                            <li>"What process improvements would save our team time?"</li>
+                            <li>"Which clients would benefit from a QBR?"</li>
+                            <li>"Are there untapped growth opportunities in my portfolio?"</li>
+                        </ul>
+                    </div>
+                `
+            }
+        ];
+        
+        let currentPhase = 0;
+        
+        function renderPhase(index) {
+            const phase = phases[index];
+            const timeline = document.getElementById('timeline');
+            const content = document.getElementById('content');
+            
+            document.getElementById('progressBar').style.width = ((index + 1) / phases.length) * 100 + '%';
+            
+            timeline.innerHTML = phases.map((p, i) => `
+                <div class="phase ${i === index ? 'active' : ''}" onclick="goToPhase(${i})">
+                    <div class="phase-number">${i + 1}</div>
+                    <div class="phase-title">${p.title}</div>
+                    <div class="phase-duration">${p.duration}</div>
+                </div>
+            `).join('');
+            
+            content.innerHTML = `<div class="phase-content active">${phase.content}</div>`;
+            
+            document.getElementById('prevBtn').disabled = index === 0;
+            document.getElementById('nextBtn').disabled = index === phases.length - 1;
+        }
+        
+        function nextPhase() {
+            if (currentPhase < phases.length - 1) {
+                currentPhase++;
+                renderPhase(currentPhase);
+                document.querySelector('.content').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+        
+        function previousPhase() {
+            if (currentPhase > 0) {
+                currentPhase--;
+                renderPhase(currentPhase);
+                document.querySelector('.content').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+        
+        function goToPhase(index) {
+            currentPhase = index;
+            renderPhase(currentPhase);
+        }
+        
+        renderPhase(0);
+    </script>
+</body>
+</html>
